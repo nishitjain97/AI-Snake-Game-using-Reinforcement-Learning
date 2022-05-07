@@ -16,7 +16,7 @@ class Direction(Enum):
 Point = namedtuple('Point', 'x, y')
 
 # rgb colors
-WHITE = (255, 255, 255)
+WHITE = (255, 255, 255) 
 RED = (200,0,0)
 BLUE1 = (0, 0, 255)
 BLUE2 = (0, 100, 255)
@@ -25,7 +25,7 @@ BLACK = (0,0,0)
 BLOCK_SIZE = 20
 SPEED = 20
 
-class SnakeGame:
+class SnakeGameAI:
     
     def __init__(self, w=640, h=480):
         self.w = w
@@ -34,7 +34,9 @@ class SnakeGame:
         self.display = pygame.display.set_mode((self.w, self.h))
         pygame.display.set_caption('Snake')
         self.clock = pygame.time.Clock()
-        
+        self.reset()
+
+    def reset(self):
         # init game state
         self.direction = Direction.RIGHT
         
@@ -46,6 +48,8 @@ class SnakeGame:
         self.score = 0
         self.food = None
         self._place_food()
+        self.frame_iteration = 0
+        
         
     def _place_food(self):
         x = random.randint(0, (self.w-BLOCK_SIZE )//BLOCK_SIZE )*BLOCK_SIZE 
